@@ -7,3 +7,4 @@ things then have feeling. Bitcoin/Sneakers
 
 #Full stack:I should handle all things about data.  collection/preparing/modeling/testing/prediction/visulization/
 
+#Ask why:I should know why use every single model/function/method
