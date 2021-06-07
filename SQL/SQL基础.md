@@ -91,26 +91,39 @@ JOIN 子句用于把来自两个或多个表的行结合起来，基于这些表
 &nbsp;
 
 **DATE相关函数**  
-函数	描述
+函数	描述 
+
 NOW()	返回当前的日期和时间
+
 CURDATE()	返回当前的日期
+
 CURTIME()	返回当前的时间
+
 DATE()	提取日期或日期/时间表达式的日期部分
+
 EXTRACT()	返回日期/时间的单独部分
+
 DATE_ADD()	向日期添加指定的时间间隔
+
 DATE_SUB()	从日期减去指定的时间间隔
+
 DATEDIFF()	返回两个日期之间的天数
+
 DATE_FORMAT()	用不同的格式显示日期/时间
 
 &nbsp;
 
 **自连接**
 
+是数学上的排列+过滤筛选
+
 删除 `Person` 表中所有重复的电子邮箱
 
 DELETE p1 
 FROM Person p1,Person p2
 WHERE p1.Email = p2.Email AND p1.Id > p2.Id
+
+（https://zhuanlan.zhihu.com/p/141083771?from_voters_page=true）
 
 &nbsp;
 
@@ -150,11 +163,15 @@ SELECT region,count(school)
 FROM T02_Bejing_school
 WHERE region IN ('海淀' , '西城' , '东城')
 GROUP BY region HAVING count(school) > 10;
-注意！我们不能用where来筛选超过学校数量超过10的区，因为表中不存在这样一条记录。而HAVING子句可以让我们筛选成组后的各组数据．
+注意！不能用where来筛选超过学校数量超过10的区，因为表中不存在这样一条记录。而HAVING子句可以让我们筛选成组后的各组数据．
 
 &nbsp;
 
 **WINDOW FUNCTION**
+
+分组/排序/不减小原表行数
+
+（RANK：5558 DENSE_RANK:5556 ROW_NUMBER:5678）
 
 SELECT * 
 FROM 
@@ -163,7 +180,7 @@ FROM
 
 ​			RANK() OVER (PARTITION BY 班级 
 
-​										ORDER BY  分数) AS  rank   FROM TABLE ) as t1 
+​										ORDER BY  分数 DESC) AS  rank   FROM TABLE ) as t1 
 
 HAVING  
 
