@@ -1,13 +1,12 @@
 Algorithm
 ========
 
-**排序算法**
+# 1，排序算法
 
 对array=[5,3,1,2,0]进行排序
 
+### 选择排序 (选出最小index，插入新list)
 ```
-#选择排序 (选出最小index，插入新list)
-
 def findsmallest(arr):
   
   smallest_num=arr[0]
@@ -26,6 +25,22 @@ def sortarray(arr):
   for i in range(len(arr)):
     smallest_index=findsmallest(arr)
     sortedarr.append(arr.pop(smallest_index))
-  return sortedarr
-
+  return sortedarr,
 ```
+### 冒泡排序
+```
+def bubblesort(arr):
+    for i in range(1,len(arr)):
+        for j in range(0,len(arr)-1):
+            if arr[j] < arr[j+1]:
+                arr[j] , arr[j+1] = arr[j+1] ,arr[j]
+    return arr
+```
+
+
+
+
+
+
+
+
