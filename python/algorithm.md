@@ -37,6 +37,12 @@ def bubblesort(arr):
     return arr
 ```
 
+### 快速排序
+```
+def quicksort(arr):
+  if len(arr)<2:
+ 
+```
 
 
 
