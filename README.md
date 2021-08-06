@@ -9,4 +9,4 @@ things then have feeling. Bitcoin/Sneakers
 
 #Ask why:I should know why use every single model/function/method
 
-*RECORD cognitive processes
+*RECORD cognitive process
