@@ -3,13 +3,7 @@ AI, Deep Learning, and Reinforcement Learning study repository!  l
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Setup](#setup)
-3. [Directory Structure](#directory-structure)
-4. [Getting Started](#getting-started)
-5. [Resources](#resources)
-6. [Contributing](#contributing)
-7. [License](#license)
+
 
 ## Introduction
 
