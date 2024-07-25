@@ -2,5 +2,5 @@
 
 This is a dynamic knowledge graph
 
-[Click here to view the knowledge graph](https://chenshulun458.github.io/ML/)
+:star:[Click here to view the knowledge graph](https://chenshulun458.github.io/ML/)
 

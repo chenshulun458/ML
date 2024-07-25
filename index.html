@@ -9,20 +9,21 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #f0f0f0; /* 浅灰色背景 */
+            background-color: #f0f0f0; 
             color: #333;
             font-family: Arial, sans-serif;
         }
         .node circle {
             fill: url(#grad);
-            stroke: #006400; /* 深绿色边框 */
+            stroke: #006400; 
             stroke-width: 2px;
             filter: url(#shadow);
         }
         .node text {
-            font-size: 14px;
-            fill: #006400; /* 深绿色文字 */
+            font-size: 12px;
+            fill: #000; 
             pointer-events: none;
+            font-weight:bold
         }
         .link {
             stroke: #666;
@@ -61,20 +62,10 @@
         const graph = {
             "nodes": [
                 { "id": "Reinforcement Learning", "url": "https://github.com/yourusername/repo1" },
-                { "id": "Q-Learning", "url": "https://github.com/yourusername/repo2" },
-                { "id": "Deep Q-Networks", "url": "https://github.com/yourusername/repo3" },
-                { "id": "Policy Gradient", "url": "https://github.com/yourusername/repo4" },
-                { "id": "Actor-Critic", "url": "https://github.com/yourusername/repo5" },
-                { "id": "Monte Carlo Methods", "url": "https://github.com/yourusername/repo6" },
-                { "id": "Temporal Difference", "url": "https://github.com/yourusername/repo7" }
+                { "id": "Q-Learning", "url": "https://github.com/yourusername/repo2" }
             ],
             "links": [
-                { "source": "Reinforcement Learning", "target": "Q-Learning" },
-                { "source": "Reinforcement Learning", "target": "Deep Q-Networks" },
-                { "source": "Reinforcement Learning", "target": "Policy Gradient" },
-                { "source": "Policy Gradient", "target": "Actor-Critic" },
-                { "source": "Reinforcement Learning", "target": "Monte Carlo Methods" },
-                { "source": "Reinforcement Learning", "target": "Temporal Difference" }
+                { "source": "Reinforcement Learning", "target": "Q-Learning" }
             ]
         };
 
