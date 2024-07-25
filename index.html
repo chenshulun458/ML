@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning Knowledge Graph</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .node circle {
+            fill: #69b3a2;
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font-size: 12px;
+            fill: #333;
+        }
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.6;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <svg width="960" height="600"></svg>
+    <script>
+        const svg = d3.select("svg"),
+              width = +svg.attr("width"),
+              height = +svg.attr("height");
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        const simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(d => d.id))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const graph = {
+            "nodes": [
+                { "id": "Reinforcement Learning" },
+                { "id": "Q-Learning" },
+                { "id": "Deep Q-Networks" },
+                { "id": "Policy Gradient" },
+                { "id": "Actor-Critic" },
+                { "id": "Monte Carlo Methods" },
+                { "id": "Temporal Difference" }
+            ],
+            "links": [
+                { "source": "Reinforcement Learning", "target": "Q-Learning" },
+                { "source": "Reinforcement Learning", "target": "Deep Q-Networks" },
+                { "source": "Reinforcement Learning", "target": "Policy Gradient" },
+                { "source": "Policy Gradient", "target": "Actor-Critic" },
+                { "source": "Reinforcement Learning", "target": "Monte Carlo Methods" },
+                { "source": "Reinforcement Learning", "target": "Temporal Difference" }
+            ]
+        };
+
+        const link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("class", "link");
+
+        const node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node");
+
+        node.append("circle")
+            .attr("r", 10)
+            .attr("fill", d => color(d.id));
+
+        node.append("text")
+            .attr("dy", -3)
+            .attr("x", 12)
+            .text(d => d.id);
+
+        simulation
+            .nodes(graph.nodes)
+            .on("tick", ticked);
+
+        simulation
+            .force("link")
+            .links(graph.links);
+
+        function ticked() {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+        }
+    </script>
+</body>
+</html>
