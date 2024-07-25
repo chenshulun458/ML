@@ -6,41 +6,61 @@
     <title>Knowledge Management System</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
         .node circle {
-            fill: #98FB98; /* Pale green color */
-            stroke: #006400; /* Dark green color */
-            stroke-width: 1.5px;
+            fill: url(#grad);
+            stroke: #fff;
+            stroke-width: 2px;
+            filter: url(#shadow);
         }
         .node text {
             font-size: 14px;
-            fill: #006400; /* Dark green color */
+            fill: #fff;
             pointer-events: none;
         }
         .link {
-            stroke: #999;
+            stroke: #aaa;
             stroke-opacity: 0.6;
-            stroke-width: 1.5px;
+            stroke-width: 2px;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: rgba(0, 0, 0, 0.75);
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-    <svg width="1200" height="800"></svg>
+    <svg width="100vw" height="100vh"></svg>
     <script>
         const svg = d3.select("svg"),
-              width = +svg.attr("width"),
-              height = +svg.attr("height");
+              width = window.innerWidth,
+              height = window.innerHeight;
 
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(d => d.id).distance(100))
-            .force("charge", d3.forceManyBody().strength(-500))
+            .force("link", d3.forceLink().id(d => d.id).distance(120))
+            .force("charge", d3.forceManyBody().strength(-600))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         const graph = {
             "nodes": [
-                { "id": "Reinforcement Learning", "url": "https://github.com/yourusername/repo1" },
-                { "id": "Q-Learning", "url": "https://github.com/yourusername/repo2" }
+                { "id": "Reinforcement Learning", "url": "https://github.com/yourusername/repo1" }
             ],
             "links": [
                 { "source": "Reinforcement Learning", "target": "Q-Learning" }
@@ -62,11 +82,23 @@
             .attr("class", "node")
             .on("click", (event, d) => {
                 window.open(d.url, '_blank');
+            })
+            .on("mouseover", function(event, d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html(d.id)
+                    .style("left", (event.pageX + 5) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             });
 
         node.append("circle")
-            .attr("r", 15)
-            .attr("fill", d => color(d.id));
+            .attr("r", 15);
 
         node.append("text")
             .attr("dy", -3)
@@ -91,6 +123,35 @@
             node
                 .attr("transform", d => `translate(${d.x},${d.y})`);
         }
+
+        // Add gradient
+        svg.append("defs").append("linearGradient")
+            .attr("id", "grad")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "100%")
+            .selectAll("stop")
+            .data([
+                { offset: "0%", color: "#7FFF00" }, // Chartreuse
+                { offset: "100%", color: "#32CD32" }  // LimeGreen
+            ])
+            .enter().append("stop")
+            .attr("offset", d => d.offset)
+            .attr("stop-color", d => d.color);
+
+        // Add shadow filter
+        svg.append("defs").append("filter")
+            .attr("id", "shadow")
+            .append("feDropShadow")
+            .attr("dx", 2)
+            .attr("dy", 2)
+            .attr("stdDeviation", 3);
+
+        // Tooltip
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
     </script>
 </body>
 </html>
