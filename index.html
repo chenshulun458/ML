@@ -78,6 +78,13 @@
             ]
         };
 
+        // Mapping node ids to actual node objects
+        const nodeMap = new Map(graph.nodes.map(node => [node.id, node]));
+        graph.links.forEach(link => {
+            link.source = nodeMap.get(link.source);
+            link.target = nodeMap.get(link.target);
+        });
+
         const link = svg.append("g")
             .attr("class", "links")
             .selectAll("line")
