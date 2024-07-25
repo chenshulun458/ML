@@ -1,4 +1,6 @@
 # Deep Learning and Reinforcement Learning Study Repository
 
-<iframe src="https://chenshulun458.github.io/ML/" width="100%" height="600"></iframe>
+This is a dynamic knowledge graph
+
+[Click here to view the knowledge graph](https://chenshulun458.github.io/ML/)
 

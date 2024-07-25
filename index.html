@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reinforcement Learning Knowledge Graph</title>
+    <title>Knowledge Management System</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <style>
         .node circle {
-            fill: #69b3a2;
-            stroke: #333;
+            fill: #98FB98; /* Pale green color */
+            stroke: #006400; /* Dark green color */
             stroke-width: 1.5px;
         }
         .node text {
-            font-size: 12px;
-            fill: #333;
+            font-size: 14px;
+            fill: #006400; /* Dark green color */
+            pointer-events: none;
         }
         .link {
             stroke: #999;
@@ -23,7 +24,7 @@
     </style>
 </head>
 <body>
-    <svg width="960" height="600"></svg>
+    <svg width="1200" height="800"></svg>
     <script>
         const svg = d3.select("svg"),
               width = +svg.attr("width"),
@@ -32,27 +33,17 @@
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(d => d.id))
-            .force("charge", d3.forceManyBody().strength(-300))
+            .force("link", d3.forceLink().id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-500))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         const graph = {
             "nodes": [
-                { "id": "Reinforcement Learning" },
-                { "id": "Q-Learning" },
-                { "id": "Deep Q-Networks" },
-                { "id": "Policy Gradient" },
-                { "id": "Actor-Critic" },
-                { "id": "Monte Carlo Methods" },
-                { "id": "Temporal Difference" }
+                { "id": "Reinforcement Learning", "url": "https://github.com/yourusername/repo1" },
+                { "id": "Q-Learning", "url": "https://github.com/yourusername/repo2" }
             ],
             "links": [
-                { "source": "Reinforcement Learning", "target": "Q-Learning" },
-                { "source": "Reinforcement Learning", "target": "Deep Q-Networks" },
-                { "source": "Reinforcement Learning", "target": "Policy Gradient" },
-                { "source": "Policy Gradient", "target": "Actor-Critic" },
-                { "source": "Reinforcement Learning", "target": "Monte Carlo Methods" },
-                { "source": "Reinforcement Learning", "target": "Temporal Difference" }
+                { "source": "Reinforcement Learning", "target": "Q-Learning" }
             ]
         };
 
@@ -68,15 +59,18 @@
             .selectAll("g")
             .data(graph.nodes)
             .enter().append("g")
-            .attr("class", "node");
+            .attr("class", "node")
+            .on("click", (event, d) => {
+                window.open(d.url, '_blank');
+            });
 
         node.append("circle")
-            .attr("r", 10)
+            .attr("r", 15)
             .attr("fill", d => color(d.id));
 
         node.append("text")
             .attr("dy", -3)
-            .attr("x", 12)
+            .attr("x", 20)
             .text(d => d.id);
 
         simulation
