@@ -1,0 +1,21 @@
+{
+    "nodes": [
+        { "id": "AI" },
+        { "id": "Machine Learning" },
+        { "id": "Deep Learning" },
+        { "id": "Supervised Learning" },
+        { "id": "Unsupervised Learning" },
+        { "id": "Neural Networks" },
+        { "id": "CNN" },
+        { "id": "RNN" }
+    ],
+    "links": [
+        { "source": "AI", "target": "Machine Learning" },
+        { "source": "AI", "target": "Deep Learning" },
+        { "source": "Machine Learning", "target": "Supervised Learning" },
+        { "source": "Machine Learning", "target": "Unsupervised Learning" },
+        { "source": "Deep Learning", "target": "Neural Networks" },
+        { "source": "Deep Learning", "target": "CNN" },
+        { "source": "Deep Learning", "target": "RNN" }
+    ]
+}
