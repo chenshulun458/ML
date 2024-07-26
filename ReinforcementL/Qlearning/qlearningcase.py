@@ -4,15 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 
-
-# 忽略 np.bool8 的警告
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message="`np.bool8` is a deprecated alias for `np.bool_`")
 
-
 env = gym.make("MountainCar-v0")
 env.reset()
-# print(env.reset()[0])
 
 LEARNING_RATE = 0.5
 DISCOUNT = 0.95
@@ -23,9 +19,6 @@ Q_TABLE_LEN = 20
 DISCRETE_OS_SIZE = [Q_TABLE_LEN] * len(env.observation_space.high)
 
 discrete_os_win_size = (env.observation_space.high - env.observation_space.low) / DISCRETE_OS_SIZE
-
-# q_table = np.random.uniform(low=0, high=1,
-#                             size=(DISCRETE_OS_SIZE + [env.action_space.n]))
 
 q_table = np.zeros(DISCRETE_OS_SIZE + [env.action_space.n])
 
@@ -48,7 +41,6 @@ def take_epilon_greedy_action(state, epsilon):
 
 ep_rewards = []
 aggr_ep_rewards = {'ep':[],'avg':[],'min':[],'max':[]}
-
 
 for episode in range(EPISODES):
     # initiate reward every episode
@@ -99,8 +91,6 @@ for episode in range(EPISODES):
         aggr_ep_rewards['avg'].append(avg_reward)
         aggr_ep_rewards['min'].append(min(ep_rewards[-SHOW_EVERY:]))
         aggr_ep_rewards['max'].append(max(ep_rewards[-SHOW_EVERY:]))
-
-
 
 plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['avg'], label = 'avg')
 plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['min'], label = 'min')
